@@ -1,3 +1,25 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+//= require codemirror
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+.CodeMirror-scroll {
+  height: 400px;
+  overflow: auto;
+}
+
+.mono {
+  font-family: 'Courier', sans-serif;                                                                                                                             
+}
+
+.activeline {
+  background: #e8f2ff !important;
+}
