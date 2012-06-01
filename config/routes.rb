@@ -1,5 +1,7 @@
 HcfIo::Application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :source_files
+  end
 
   get "home/index"
 

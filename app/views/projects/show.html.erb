@@ -181,7 +181,7 @@
     <button class="btn" onClick="$('#newFile').modal('toggle')">
       Close
     </button>
-    <button class="btn btn-primary" onClick="app.create($('#inNewfn').val())">
+    <button class="btn btn-primary" onClick="createNewFile()">
       Create
     </button>
   </div>
@@ -197,6 +197,23 @@
       f = files[i];
       app.addFile(f.name, f.code);
     }
+  };
+
+  var onNewFileCreated = function(data, textStatus, jqXHR) {
+    app.addFile(data.name);
+  };
+
+  var createNewFile = function()
+  {
+    var fn = $('#inNewfn').val();
+    $.ajax({
+      type: "post",
+      url: '<%= "/projects/" << params[:id] << "/source_files.json" %>',
+      data: {name: fn},
+      success: onNewFileCreated,
+      dataType: "json",
+    });
+    $("#newFile").modal("toggle");
   };
 
   $(function() {
