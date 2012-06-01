@@ -104,21 +104,16 @@ class DcpuWebapp
     @updateCycles()
     @updateRegs()
     @dumpMemory()
-
-    file = new File "entry.s"
-    file.text demoProgram
-    @mFiles.push file
-    @mFiles["entry.s"] = file
-
-    file = new File "msg.s"
-    file.text demoProgramMsg
-    @mFiles.push file
-    @mFiles["msg.s"] = file
-
     @mCreateDialog = $("#newFile").modal {
       show: false }
     @mCreateDialog.hide()
     @assemble()
+
+  addFile: (name, content) ->
+    f = new File name
+    f.text content
+    @mFiles.push f
+    @mFiles[f.name()] = f
 
   #
   # Refresh the Register Output
@@ -250,58 +245,3 @@ class DcpuWebapp
 $ () ->
   window.app = new DcpuWebapp()
 
-
-demoProgram = '
-; LEM1802/GenericTimer Test.\n
-;\n
-; If operating correctly, C and X should increment at 1Hz and a simple\n
-; message should appear on the framebuffer.\n
-;\n
-; If C increments, then the clocks hwi #1 is working correctly.\n
-; If X increments, then the clocks interrupts are working correctly.\n
-;\n
-:start  ; Map framebuffer RAM\n
-        set a, 0\n
-        set b, 0x1000\n
-        hwi 0\n
-\n
-        ; Print a message\n
-        set a, ohhey\n
-        jsr print\n
-\n
-        ; Timer tick at 1Hz\n
-        set a, 0\n
-        set b, 60\n
-        hwi 1\n
-\n
-        ; Timer interrupts on 2\n
-        set a, 2\n
-        set b, 2\n
-        hwi 1\n
-\n
-        ; Set interrupt address\n
-        ias isr\n
-\n
-        set a, 1\n
-:loop   hwi 1\n
-        set pc, loop\n
-\n
-:print  set b, 0\n
-:print_loop\n
-        set c, [a]\n
-        ife c, 0\n
-        set pc, pop\n
-        bor c, 0x0f00\n
-        set [0x1000+b], c\n
-        add a, 1\n
-        add b, 1\n
-        set pc, print_loop\n
-:crash  set pc, crash\n
-\n
-:isr    add x, 1\n
-        set a, pop\n
-        set pc, pop\n'
-
-demoProgramMsg = '
-:ohhey  dat "So the linker works (kinda).", 0
-'
