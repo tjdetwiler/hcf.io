@@ -64,7 +64,6 @@ class File
           cm.setMarker n, "<span style='color: #900'>●</span> %N%"
     })
 
-    $("a[href=#openFile-#{id}").tab "show"
     $(".file-close").click () -> alert "oh hey"
     link.click()
     @mEditor.refresh()
