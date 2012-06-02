@@ -1,6 +1,8 @@
 HcfIo::Application.routes.draw do
   resources :projects do
-    resources :source_files
+    resources :files,
+              :controller => "source_files",
+              :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
   end
 
   get "home/index"

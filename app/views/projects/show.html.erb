@@ -188,6 +188,7 @@
 </div>
 
 <script type="text/javascript">
+  var projId = <%= params[:id] %>;
   var onProjectLoad = function(data, textStatus, jqXHR)
   {
     var files = data.files;
@@ -208,7 +209,7 @@
     var fn = $('#inNewfn').val();
     $.ajax({
       type: "post",
-      url: '<%= "/projects/" << params[:id] << "/source_files.json" %>',
+      url: '<%= "/projects/" << params[:id] << "/files.json" %>',
       data: {name: fn},
       success: onNewFileCreated,
       dataType: "json",

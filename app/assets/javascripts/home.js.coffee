@@ -155,6 +155,7 @@ class DcpuWebapp
   # Load text from UI, assemble it, and load it into the CPU.
   #
   assemble: () ->
+    @save()
     jobs = []
     for file in @mFiles
       @mAsm = new Assembler()
@@ -238,6 +239,31 @@ class DcpuWebapp
     $("#btnStep").click () -> app.step()
     $("#btnReset").click () -> app.reset()
     $("#btnAssemble").click () -> app.assemble()
+
+  saveFile: (f) ->
+    console.log "saving #{f.name()}"
+    data = JSON.stringify {name: f.name(), code: f.text()}
+    console.log "Sending <#{data}>"
+    $.ajax {
+      type: "put",
+      url: "/projects/" + projId + "/files/" + f.name() + ".json",
+      contentType: "application/json",
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: data,
+      success: () -> alert("Great Success"),
+      error: (a,b,c) ->
+        console.log a
+        console.log b
+        console.log c
+    }
+
+  save: ()  ->
+    for k,v in @mFiles
+      console.log k
+      if isNaN k
+        @saveFile k
 
 #
 # On Load
