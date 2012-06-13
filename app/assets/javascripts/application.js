@@ -7,3 +7,12 @@
 //= require jquery
 //= require bootstrap
 //= require_tree .
+
+
+$(function() {
+  $("#loginModal").modal("hide");
+  $("#loginTabs").click(function(e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+});

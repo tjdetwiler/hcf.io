@@ -238,6 +238,7 @@ class DcpuWebapp
     $("#btnStep").click () -> app.step()
     $("#btnReset").click () -> app.reset()
     $("#btnAssemble").click () -> app.assemble()
+    $("#btnSave").click () -> app.save()
 
   saveFile: (f) ->
     console.log "saving #{f.name()}"

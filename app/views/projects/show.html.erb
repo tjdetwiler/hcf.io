@@ -1,25 +1,4 @@
 
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">hcf.io alpha</a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li class="active"><a href="#emulator" data-toggle="tab">Emulator</a></li>
-          <li><a href="#disassembler" data-toggle="tab">Disassembler</a></li>
-          <li><a href="#font-editor" data-toggle="tab">Font Editor</a></li>
-          <li><a href="#about" data-toggle="tab">About</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
-</div>
-
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
@@ -34,7 +13,7 @@
             </form>
           </li>
           <li>
-            <a href="#">
+            <a id="btnSave" href="#">
               <i class="icon-share"></i>
               Save
             </a>
@@ -160,11 +139,6 @@
     </div> <!--/span-->
   </div><!--/row-->
   <hr>
-  <!--
-  <footer>
-    <p>&copy; Company 2012</p>
-  </footer>
-  -->
 </div><!--/.fluid-container-->
 
 <div class="modal" id="newFile">
@@ -188,7 +162,7 @@
 </div>
 
 <script type="text/javascript">
-  var projId = <%= params[:id] %>;
+  var projId = "<%= params[:id] %>";
   var onProjectLoad = function(data, textStatus, jqXHR)
   {
     var files = data.files;

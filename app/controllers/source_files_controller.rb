@@ -31,7 +31,7 @@ class SourceFilesController < ApplicationController
   end
 
   def update
-    p params
+    @user = session[:user]
     @project = Project.find params[:project_id]
     @file = @project.source_files.find_by_name params[:id]
 

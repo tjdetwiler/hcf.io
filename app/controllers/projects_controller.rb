@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    printf "Using id %d\n", params[:id]
     @project = Project.find(params[:id])
 
     respond_to do |format|
@@ -43,7 +42,10 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(params[:project])
+    @user = session[:user]
+    p "user"
+    p @user
+    @user.projects.create(params[:project])
 
     respond_to do |format|
       if @project.save
@@ -83,5 +85,9 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :ok }
     end
+  end
+
+  def default
+    redirect_to Project.find(1)
   end
 end
