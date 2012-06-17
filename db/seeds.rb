@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.delete_all
+admin = User.create({:login=>"admin", :email=>"admin@hcf.io", :password=>"password", :password_confirmation=>"password"})
+Project.delete_all
+init_project = Project.create({})
+
