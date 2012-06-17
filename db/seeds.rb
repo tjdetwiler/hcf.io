@@ -10,4 +10,7 @@ User.delete_all
 admin = User.create({:login=>"admin", :email=>"admin@hcf.io", :password=>"password", :password_confirmation=>"password"})
 Project.delete_all
 init_project = Project.create({})
+demo_prog = File.open("lib/assets/dcpu-asm/demo-entry.s", "r")
+demo_prog = demo_prog.read()
+init_project.source_files.create(:name => "entry.s", :code => demo_prog)
 
